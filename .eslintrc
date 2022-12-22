@@ -1,0 +1,19 @@
+{
+    "extends":"strongloop",
+    "parserOptions":{
+        "ecmaVersion":2018
+    },
+    "env":{
+        "es6":true,
+        "node":true,
+        "mocha":true
+    },
+    "rules":{
+        "strict":"off",
+        "comma-dangle":"off",
+        "max-len":"off",
+        "no-unused-vars":"warn",
+        "handle-callback-err":"off",
+        "eol-last":"off"
+    }
+}
