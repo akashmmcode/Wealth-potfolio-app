@@ -1,14 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const DB = require("./database");
-const Model = require("./models");
+const Model = require("./models/index");
 const app = express();
 app.use(cors());
 
 app.get("/", (req, res) => {
   res.send({ message: "hello" });
 });
-
 
 app.listen(5000, async (error) => {
   if (error) {

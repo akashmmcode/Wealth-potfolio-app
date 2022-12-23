@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const db = require("../database");
 
-const Users = db.define(
-  "users",
+const FixedIncome = db.define(
+  "fixedincome",
   {
     id: {
       type: Sequelize.UUID,
@@ -10,28 +10,27 @@ const Users = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    first_name: {
+    title: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    last_name: {
+    description: {
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    activated: {
-      type: Sequelize.BOOLEAN,
-      default: false,
       allowNull: true,
+    },
+    cycle: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    amount: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
   },
   {
     timestamps: true,
-    tableName: "users",
+    tableName: "fixedincome",
   }
 );
 
-module.exports = Users;
+module.exports = FixedIncome;
