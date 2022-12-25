@@ -4,6 +4,21 @@ const { Assets } = require("../models");
 const { Equity } = require("../models");
 const { Expenditure } = require("../models");
 
+const login = async (firstname, password) => {
+  try {
+    const loggedinUser = await Users.findOne({
+      where: { firstname: firstname, password: password },
+    });
+
+    if (loggedinUser == null) {
+      return "Not authorised";
+    }
+    return loggedinUser;
+  } catch {
+    throw error;
+  }
+};
+
 const getAllUsers = async () => {
   try {
     const users = await Users.findAll({});
@@ -104,4 +119,5 @@ module.exports = {
   insertAsset,
   insertEquity,
   insertExpenditure,
+  login,
 };

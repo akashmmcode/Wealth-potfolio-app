@@ -87,6 +87,16 @@ const createExpenditure = async (req, res) => {
   }
 };
 
+const userLogin = async (req, res) => {
+  try {
+    const { firstname, password } = req.body;
+    const loginuser = await wealthPotfolioService.login(firstname, password);
+    res.send(loginuser);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   createUser,
@@ -94,4 +104,5 @@ module.exports = {
   createAsset,
   createEquity,
   createExpenditure,
+  userLogin,
 };
