@@ -7,6 +7,8 @@ wealthRoutes.post(
   "/createFixedIncome",
   wealthPotfolioController.createFixedIncome
 );
+wealthRoutes.post("/createAsset", wealthPotfolioController.createAsset);
+wealthRoutes.post("/createEquity", wealthPotfolioController.createEquity);
 
 module.exports = {
   wealthRoutes,

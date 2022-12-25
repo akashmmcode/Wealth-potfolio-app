@@ -39,8 +39,43 @@ const createFixedIncome = async (req, res) => {
   }
 };
 
+const createAsset = async (req, res) => {
+  try {
+    const { name, description, value, purchase_date, userId } = req.body;
+    const newAsset = await wealthPotfolioService.insertAsset(
+      name,
+      description,
+      value,
+      purchase_date,
+      userId
+    );
+    res.send(newAsset);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
+const createEquity = async (req, res) => {
+  try {
+    const { stock_name, unit_holding, cost_per_unit, purchase_date, userId } =
+      req.body;
+    const newEquity = await wealthPotfolioService.insertEquity(
+      stock_name,
+      unit_holding,
+      cost_per_unit,
+      purchase_date,
+      userId
+    );
+    res.send(newEquity);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   createUser,
   createFixedIncome,
+  createAsset,
+  createEquity,
 };
