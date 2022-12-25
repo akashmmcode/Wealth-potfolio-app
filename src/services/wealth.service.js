@@ -1,4 +1,5 @@
-const { Users } = require("../models");
+const { Users } = require("../models"); //table name imported from models
+const { FixedIncome } = require("../models"); //table name imported from models
 
 const getAllUsers = async () => {
   try {
@@ -18,8 +19,23 @@ const insertUsers = async (firstname, lastname, password) => {
       activated: true,
     });
     await newUser.save();
-    console.log(newUser);
     return newUser;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const insertFixedIncome = async (title, description, cycle, amount, userId) => {
+  try {
+    const newFixedIncome = await FixedIncome.create({
+      title,
+      description,
+      cycle,
+      amount,
+      userId,
+    });
+    await newFixedIncome.save();
+    return newFixedIncome;
   } catch (error) {
     throw error;
   }
@@ -28,4 +44,5 @@ const insertUsers = async (firstname, lastname, password) => {
 module.exports = {
   getAllUsers,
   insertUsers,
+  insertFixedIncome,
 };

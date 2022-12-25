@@ -22,7 +22,7 @@ app.listen(5000, async (error) => {
   }
   try {
     await DB.authenticate();
-    await DB.sync({ force: true });
+    // await DB.sync({ force: true });
     console.log("DB Connected");
   } catch (err) {
     console.error(err);

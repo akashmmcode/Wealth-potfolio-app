@@ -23,7 +23,24 @@ const createUser = async (req, res) => {
   }
 };
 
+const createFixedIncome = async (req, res) => {
+  try {
+    const { title, description, cycle, amount, userId } = req.body;
+    const newFixedIncome = await wealthPotfolioService.insertFixedIncome(
+      title,
+      description,
+      cycle,
+      amount,
+      userId
+    );
+    res.send(newFixedIncome);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   createUser,
+  createFixedIncome,
 };
