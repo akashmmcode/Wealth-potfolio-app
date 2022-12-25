@@ -10,11 +10,11 @@ const Users = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    first_name: {
+    firstname: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    last_name: {
+    lastname: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -24,7 +24,7 @@ const Users = db.define(
     },
     activated: {
       type: Sequelize.BOOLEAN,
-      default: false,
+      default: true,
       allowNull: true,
     },
   },

@@ -11,12 +11,11 @@ Users.hasMany(Equity);
 Users.hasMany(Expenditure);
 Expenditure.hasMany(Documents);
 
-
 module.exports = {
   Users,
   FixedIncome,
   Assets,
   Equity,
   Expenditure,
-  Documents
+  Documents,
 };

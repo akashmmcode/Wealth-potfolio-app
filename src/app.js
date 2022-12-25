@@ -1,9 +1,15 @@
 const express = require("express");
 const cors = require("cors");
 const DB = require("./database");
-const Model = require("./models/index");
+// const Model = require("./models/index");
+const bodyParser = require("body-parser");
+const routes = require("./routes");
+
 const app = express();
 app.use(cors());
+app.use(bodyParser.json());
+
+app.use("/users", routes.wealthRoutes);
 
 app.get("/", (req, res) => {
   res.send({ message: "hello" });
