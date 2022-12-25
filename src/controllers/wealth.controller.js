@@ -72,10 +72,26 @@ const createEquity = async (req, res) => {
   }
 };
 
+const createExpenditure = async (req, res) => {
+  try {
+    const { type, value, date, userId } = req.body;
+    const newExpenditure = await wealthPotfolioService.insertExpenditure(
+      type,
+      value,
+      date,
+      userId
+    );
+    res.send(newExpenditure);
+  } catch (error) {
+    res.status(400).send({ error: error });
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   createUser,
   createFixedIncome,
   createAsset,
   createEquity,
+  createExpenditure,
 };

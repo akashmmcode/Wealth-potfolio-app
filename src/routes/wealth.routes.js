@@ -9,6 +9,10 @@ wealthRoutes.post(
 );
 wealthRoutes.post("/createAsset", wealthPotfolioController.createAsset);
 wealthRoutes.post("/createEquity", wealthPotfolioController.createEquity);
+wealthRoutes.post(
+  "/createExpenditure",
+  wealthPotfolioController.createExpenditure
+);
 
 module.exports = {
   wealthRoutes,

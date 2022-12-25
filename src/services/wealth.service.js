@@ -2,6 +2,7 @@ const { Users } = require("../models"); //table name imported from models
 const { FixedIncome } = require("../models"); //table name imported from models
 const { Assets } = require("../models");
 const { Equity } = require("../models");
+const { Expenditure } = require("../models");
 
 const getAllUsers = async () => {
   try {
@@ -81,10 +82,26 @@ const insertEquity = async (
   }
 };
 
+const insertExpenditure = async (type, value, date, userId) => {
+  try {
+    const newExpenditure = await Expenditure.create({
+      type,
+      value,
+      date,
+      userId,
+    });
+    await newExpenditure.save();
+    return newExpenditure;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getAllUsers,
   insertUsers,
   insertFixedIncome,
   insertAsset,
   insertEquity,
+  insertExpenditure,
 };
