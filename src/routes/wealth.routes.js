@@ -17,6 +17,8 @@ wealthRoutes.get("/login", wealthPotfolioController.userLogin);
 wealthRoutes.get("/login/getUserDetails", wealthPotfolioController.userLoginDetails);
 wealthRoutes.put("/updateFixedIncomeByID", wealthPotfolioController.updateFixedIncome);
 wealthRoutes.put("/updateAssetByID", wealthPotfolioController.updateAsset);
+wealthRoutes.put("/updateEquityByID", wealthPotfolioController.updateEquity);
+
 
 
 

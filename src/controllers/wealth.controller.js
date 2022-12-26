@@ -130,6 +130,17 @@ const updateAsset = async (req, res) => {
   }
 };
 
+//to update Equity with ID
+const updateEquity = async (req, res) => {
+  try {
+      const { id,stock_name, unit_holding, cost_per_unit, purchase_date} = req.body;
+      const updateEquity = await wealthPotfolioService.updateEquityByID(id,{stock_name,unit_holding,cost_per_unit,purchase_date});
+      res.send(updateEquity);
+  } catch (error) {
+      res.status(400).send({ error: error });
+  }
+};
+
 module.exports = {
   fetchAllUsers,
   createUser,
@@ -140,5 +151,6 @@ module.exports = {
   userLogin,
   userLoginDetails,
   updateFixedIncome,
-  updateAsset
+  updateAsset,
+  updateEquity
 };

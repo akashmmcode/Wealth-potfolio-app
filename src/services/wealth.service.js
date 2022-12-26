@@ -153,6 +153,18 @@ const updateAssetByID = async (id, data) => {
   }
 };
 
+//to update Equity with ID
+const updateEquityByID = async (id, data) => {
+  try {
+      const updateEquity = await Equity.update(data, {
+          where: { id },
+        });
+        return "Updated"
+  } catch (error) {
+      throw error;
+  }
+};
+
 
 module.exports = {
   getAllUsers,
@@ -164,5 +176,6 @@ module.exports = {
   login,
   getDetailsOfUser,
   updateFixedIncomeByID,
-  updateAssetByID
+  updateAssetByID,
+  updateEquityByID
 };
