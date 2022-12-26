@@ -112,7 +112,7 @@ const userLoginDetails = async(req,res)=>{
 const updateFixedIncome = async (req, res) => {
   try {
       const { id,title, description, cycle, amount} = req.body;
-      const updateFI = await wealthPotfolioService.updateFixedIncome(id,{title,description,cycle,amount});
+      const updateFI = await wealthPotfolioService.updateFixedIncomeByID(id,{title,description,cycle,amount});
       res.send(updateFI);
   } catch (error) {
       res.status(400).send({ error: error });

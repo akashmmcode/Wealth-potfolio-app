@@ -130,8 +130,7 @@ const insertExpenditure = async (type, value, date, userId) => {
 };
 
 //to update fixed income with ID
-const updateFixedIncome = async (id, data) => {
-  console.log(data);
+const updateFixedIncomeByID = async (id, data) => {
   try {
       const updateFI = await FixedIncome.update(data, {
           where: { id },
@@ -152,5 +151,5 @@ module.exports = {
   insertExpenditure,
   login,
   getDetailsOfUser,
-  updateFixedIncome
+  updateFixedIncomeByID
 };
