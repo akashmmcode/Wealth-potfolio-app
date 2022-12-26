@@ -14,6 +14,8 @@ wealthRoutes.post(
   wealthPotfolioController.createExpenditure
 );
 wealthRoutes.get("/login", wealthPotfolioController.userLogin);
+wealthRoutes.get("/login/getUserDetails", wealthPotfolioController.userLoginDetails);
+
 
 module.exports = {
   wealthRoutes,

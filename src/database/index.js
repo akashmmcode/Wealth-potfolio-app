@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 
-module.exports = new Sequelize("Wealth-app", "akash", "1qaz2wsx", {
+module.exports = new Sequelize("Wealth-app", "akash", "cosmichalo1", {
   host: "localhost",
   dialect: "mysql",
   pool: {

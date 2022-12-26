@@ -1,8 +1,11 @@
+const { Sequelize } = require("sequelize");
 const { Users } = require("../models"); //table name imported from models
 const { FixedIncome } = require("../models"); //table name imported from models
 const { Assets } = require("../models");
 const { Equity } = require("../models");
 const { Expenditure } = require("../models");
+const db = require("../database");
+
 
 const login = async (firstname, password) => {
   try {
@@ -26,7 +29,21 @@ const getAllUsers = async () => {
   } catch {
     throw error;
   }
-};
+}
+
+//to get details of logged in user
+const getDetailsOfUser = async (firstname,password) => {
+  try {
+    const [userDetails,metadata] = await db.query(`select us.firstname as UserName ,att.name as AssetName, att.description as AssetDescription,att.value as AssetValue,f.title as FixedIncomenName,f.description as FixedIncomeDescription,f.amount as FixedIncomeValue,stock_name, (unit_holding * cost_per_unit) as total_stock_value from users us inner join assets att on us.id = att.userid inner join fixedincome f on us.id = f.userId inner join equity e on us.id = e.userId WHERE firstname = '${firstname}' AND password = '${password}'`);
+    const userDetailslen = Object.keys(userDetails).length;
+    if(userDetailslen === 0){
+      return "please login with proper credentials"
+    }
+    return userDetails;
+  }catch {
+    throw error
+}
+}
 
 const insertUsers = async (firstname, lastname, password) => {
   try {
@@ -112,6 +129,8 @@ const insertExpenditure = async (type, value, date, userId) => {
   }
 };
 
+
+
 module.exports = {
   getAllUsers,
   insertUsers,
@@ -120,4 +139,5 @@ module.exports = {
   insertEquity,
   insertExpenditure,
   login,
+  getDetailsOfUser
 };

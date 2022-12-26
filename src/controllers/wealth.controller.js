@@ -97,6 +97,17 @@ const userLogin = async (req, res) => {
   }
 };
 
+//details of logged in user
+const userLoginDetails = async(req,res)=>{
+  try{
+    const {firstname,password} = req.body;
+    const loginuserdetails = await wealthPotfolioService.getDetailsOfUser(firstname, password);
+    res.send(loginuserdetails);
+  }catch(error){
+    res.status(400).send({ error: error });
+  }
+}
+
 module.exports = {
   fetchAllUsers,
   createUser,
@@ -105,4 +116,5 @@ module.exports = {
   createEquity,
   createExpenditure,
   userLogin,
+  userLoginDetails
 };
