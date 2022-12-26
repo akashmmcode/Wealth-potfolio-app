@@ -15,6 +15,8 @@ wealthRoutes.post(
 );
 wealthRoutes.get("/login", wealthPotfolioController.userLogin);
 wealthRoutes.get("/login/getUserDetails", wealthPotfolioController.userLoginDetails);
+wealthRoutes.put("/updateFixedIncome", wealthPotfolioController.updateFixedIncome);
+
 
 
 module.exports = {
