@@ -31,6 +31,16 @@ const getAllUsers = async () => {
   }
 }
 
+//to get all the fixedIncome list
+const getAllFixedIncome = async () => {
+  try {
+    const fixedincome = await FixedIncome.findAll({});
+    return fixedincome;
+  } catch {
+    throw error;
+  }
+}
+
 //to get details of logged in user
 const getDetailsOfUser = async (firstname,password) => {
   try {
@@ -165,6 +175,18 @@ const updateEquityByID = async (id, data) => {
   }
 };
 
+//to delete Fixed Income by ID
+const deleteFixedIncomeByID = async (id) => {
+  try {
+      const deleteFixedIncome = await FixedIncome.destroy({
+          where: { id },
+        });
+        return getAllFixedIncome();
+  } catch (error) {
+      throw error;
+  }
+};
+
 
 module.exports = {
   getAllUsers,
@@ -177,5 +199,6 @@ module.exports = {
   getDetailsOfUser,
   updateFixedIncomeByID,
   updateAssetByID,
-  updateEquityByID
+  updateEquityByID,
+  deleteFixedIncomeByID
 };

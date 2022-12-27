@@ -18,9 +18,7 @@ wealthRoutes.get("/login/getUserDetails", wealthPotfolioController.userLoginDeta
 wealthRoutes.put("/updateFixedIncomeByID", wealthPotfolioController.updateFixedIncome);
 wealthRoutes.put("/updateAssetByID", wealthPotfolioController.updateAsset);
 wealthRoutes.put("/updateEquityByID", wealthPotfolioController.updateEquity);
-
-
-
+wealthRoutes.post("/deleteFixedIncomeByID", wealthPotfolioController.deleteFixedIncomeById);
 
 
 module.exports = {
