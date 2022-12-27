@@ -41,6 +41,15 @@ const getAllFixedIncome = async () => {
   }
 }
 
+const getAllAsset = async () => {
+  try {
+    const asset = await Assets.findAll({});
+    return asset;
+  } catch {
+    throw error;
+  }
+}
+
 //to get details of logged in user
 const getDetailsOfUser = async (firstname,password) => {
   try {
@@ -187,6 +196,19 @@ const deleteFixedIncomeByID = async (id) => {
   }
 };
 
+//to delete Asset by ID
+const deleteAssetByID = async (id) => {
+  try {
+      const deleteAsset = await Assets.destroy({
+          where: { id },
+        });
+        return getAllAsset();
+  } catch (error) {
+      throw error;
+  }
+};
+
+
 
 module.exports = {
   getAllUsers,
@@ -200,5 +222,6 @@ module.exports = {
   updateFixedIncomeByID,
   updateAssetByID,
   updateEquityByID,
-  deleteFixedIncomeByID
+  deleteFixedIncomeByID,
+  deleteAssetByID
 };

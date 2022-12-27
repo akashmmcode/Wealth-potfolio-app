@@ -151,6 +151,15 @@ const deleteFixedIncomeById = async (req, res) => {
   }
 };
 
+const deleteAssetById = async (req, res) => {
+  try {
+      const { id } = req.body;
+      const deleteasset = await wealthPotfolioService.deleteAssetByID(id);
+      res.send(deleteasset);
+  } catch (error) {
+      res.status(400).send({ error: error });
+  }
+};
 
 module.exports = {
   fetchAllUsers,
@@ -164,5 +173,6 @@ module.exports = {
   updateFixedIncome,
   updateAsset,
   updateEquity,
-  deleteFixedIncomeById
+  deleteFixedIncomeById,
+  deleteAssetById
 };
