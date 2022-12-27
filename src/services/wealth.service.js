@@ -6,7 +6,6 @@ const { Equity } = require("../models");
 const { Expenditure } = require("../models");
 const db = require("../database");
 
-
 const login = async (firstname, password) => {
   try {
     const loggedinUser = await Users.findOne({
@@ -49,6 +48,16 @@ const getAllAsset = async () => {
     throw error;
   }
 }
+
+const getAllEquity = async () => {
+  try {
+    const equity = await Equity.findAll({});
+    return equity;
+  } catch {
+    throw error;
+  }
+}
+
 
 //to get details of logged in user
 const getDetailsOfUser = async (firstname,password) => {
@@ -208,7 +217,17 @@ const deleteAssetByID = async (id) => {
   }
 };
 
-
+//to delete Equity by ID
+const deleteEquityByID = async (id) => {
+  try {
+      const deleteEquity = await Equity.destroy({
+          where: { id },
+        });
+        return getAllEquity();
+  } catch (error) {
+      throw error;
+  }
+};
 
 module.exports = {
   getAllUsers,
@@ -223,5 +242,6 @@ module.exports = {
   updateAssetByID,
   updateEquityByID,
   deleteFixedIncomeByID,
-  deleteAssetByID
+  deleteAssetByID,
+  deleteEquityByID
 };
