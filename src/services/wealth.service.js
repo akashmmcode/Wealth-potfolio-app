@@ -73,6 +73,21 @@ const getDetailsOfUser = async (firstname,password) => {
 }
 }
 
+
+const getIncomeExpenDetails = async (firstname,password) =>{
+  try {
+    const [IncomeExpenDetails,metadata] = await db.query(`SELECT firstname ,f.amount as income,(f.amount  - e.value) as total_savings,e.value as expenses from users u inner join fixedincome f on u.id = f.userId  inner join assets a on u.id = a.userId inner join expenditure e on u.id = e.userId WHERE firstname = '${firstname}' AND password = '${password}'`);
+
+    const incomeexpenDetailslen = Object.keys(IncomeExpenDetails).length;
+    if(incomeexpenDetailslen === 0){
+      return "please login with proper credentials"
+    }
+    return IncomeExpenDetails;
+  }catch {
+    throw error
+}
+}
+
 const insertUsers = async (firstname, lastname, password) => {
   try {
     const newUser = await Users.create({
@@ -243,5 +258,6 @@ module.exports = {
   updateEquityByID,
   deleteFixedIncomeByID,
   deleteAssetByID,
-  deleteEquityByID
+  deleteEquityByID,
+  getIncomeExpenDetails
 };

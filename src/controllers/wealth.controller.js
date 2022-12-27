@@ -108,6 +108,18 @@ const userLoginDetails = async(req,res)=>{
   }
 }
 
+//Income Expense for logged In user
+const userLoginIncomeExpenDetails = async(req,res)=>{
+  try{
+    const {firstname,password} = req.body;
+    const loginuserincomeexpendetails = await wealthPotfolioService.getIncomeExpenDetails(firstname, password);
+    res.send(loginuserincomeexpendetails);
+  }catch(error){
+    res.status(400).send({ error: error });
+  }
+}
+
+
 //to update fixed income with ID
 const updateFixedIncome = async (req, res) => {
   try {
@@ -185,5 +197,6 @@ module.exports = {
   updateEquity,
   deleteFixedIncomeById,
   deleteAssetById,
-  deleteEquityById
+  deleteEquityById,
+  userLoginIncomeExpenDetails
 };
