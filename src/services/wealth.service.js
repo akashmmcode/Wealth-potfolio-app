@@ -244,6 +244,20 @@ const deleteEquityByID = async (id) => {
   }
 };
 
+//Fliter by year details of logged in user  
+const filterByYearDetailsOfUser = async (firstname,password,year) => {
+  try {
+    const [userDetailsbyyear,metadata] = await db.query(`select us.firstname as UserName ,att.name as AssetName, att.description as AssetDescription,att.value as AssetValue,f.title as FixedIncomenName,f.description as FixedIncomeDescription,f.amount as FixedIncomeValue,stock_name, (unit_holding * cost_per_unit) as total_stock_value from users us inner join assets att on us.id = att.userid inner join fixedincome f on us.id = f.userId inner join equity e on us.id = e.userId WHERE firstname = '${firstname}' AND password = '${password}' AND year(att.purchase_date) = '${year}' AND year(e.purchase_date) = '${year}'`);
+    const userDetailslen = Object.keys(userDetailsbyyear).length;
+    if(userDetailslen === 0){
+      return `please login with proper credentials or does not contain any details for year ${year} `
+    }
+    return userDetailsbyyear;
+  }catch {
+    throw error
+}
+}
+
 module.exports = {
   getAllUsers,
   insertUsers,
@@ -259,5 +273,6 @@ module.exports = {
   deleteFixedIncomeByID,
   deleteAssetByID,
   deleteEquityByID,
-  getIncomeExpenDetails
+  getIncomeExpenDetails,
+  filterByYearDetailsOfUser
 };

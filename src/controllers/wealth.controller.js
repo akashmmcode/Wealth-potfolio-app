@@ -108,6 +108,17 @@ const userLoginDetails = async(req,res)=>{
   }
 }
 
+//details of logged in user
+const userLoginDetailsByYear = async(req,res)=>{
+  try{
+    const {firstname,password,year} = req.body;
+    const loginuserdetailsbyyear = await wealthPotfolioService.filterByYearDetailsOfUser(firstname, password, year);
+    res.send(loginuserdetailsbyyear);
+  }catch(error){
+    res.status(400).send({ error: error });
+  }
+}
+
 //Income Expense for logged In user
 const userLoginIncomeExpenDetails = async(req,res)=>{
   try{
@@ -198,5 +209,6 @@ module.exports = {
   deleteFixedIncomeById,
   deleteAssetById,
   deleteEquityById,
-  userLoginIncomeExpenDetails
+  userLoginIncomeExpenDetails,
+  userLoginDetailsByYear
 };
