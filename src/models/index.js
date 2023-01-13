@@ -1,9 +1,9 @@
-const Users = require("./wealth.users");
-const FixedIncome = require("./wealth.FI");
-const Assets = require("./wealth.assets");
-const Equity = require("./wealth.equity");
-const Expenditure = require("./wealth.expenditure");
-const Documents = require("./wealth.documents");
+const Users = require("./users.model");
+const FixedIncome = require("./FI.model");
+const Assets = require("./assets.model");
+const Equity = require("./equity.model");
+const Expenditure = require("./expenditure.model");
+const Documents = require("./document.model");
 
 Users.hasMany(FixedIncome);
 Users.hasMany(Assets);
