@@ -229,21 +229,7 @@ const deleteEquityById = async (req, res) => {
   }
 };
 
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  if (token == null) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, fname) => {
-    if (err) return res.sendStatus(403);
-    req.fname = fname;
-    next();
-  });
-}
-
-const authCheck = async (req, res) => {
-  req.json(posts.filter((post) => post.firstname === req.fname.firstname));
-};
 
 module.exports = {
   fetchAllUsers,
@@ -261,7 +247,5 @@ module.exports = {
   deleteAssetById,
   deleteEquityById,
   userLoginIncomeExpenDetails,
-  userLoginDetailsByYear,
-  authenticateToken,
-  authCheck,
+  userLoginDetailsByYear
 };
