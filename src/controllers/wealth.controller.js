@@ -1,4 +1,7 @@
+require("dotenv").config();
 const { wealthPotfolioService } = require("./../services");
+
+const jwt = require("jsonwebtoken");
 
 const fetchAllUsers = async (req, res) => {
   try {
@@ -86,10 +89,16 @@ const createExpenditure = async (req, res) => {
     res.status(400).send({ error: error });
   }
 };
- 
+
 const userLogin = async (req, res) => {
   try {
     const { firstname, password } = req.body;
+
+    const fname = { fname: firstname };
+
+    const accessToken = jwt.sign(fname, process.env.ACCESS_TOKEN_SECRET);
+    res.json({ accessToken: accessToken });
+
     const loginuser = await wealthPotfolioService.login(firstname, password);
     res.send(loginuser);
   } catch (error) {
@@ -98,100 +107,142 @@ const userLogin = async (req, res) => {
 };
 
 //details of logged in user
-const userLoginDetails = async(req,res)=>{
-  try{
-    const {firstname,password} = req.body;
-    const loginuserdetails = await wealthPotfolioService.getDetailsOfUser(firstname, password);
+const userLoginDetails = async (req, res) => {
+  try {
+    const { firstname, password } = req.body;
+    const loginuserdetails = await wealthPotfolioService.getDetailsOfUser(
+      firstname,
+      password
+    );
     res.send(loginuserdetails);
-  }catch(error){
+  } catch (error) {
     res.status(400).send({ error: error });
   }
-}
+};
 
 //details of logged in user
-const userLoginDetailsByYear = async(req,res)=>{
-  try{
-    const {firstname,password,year} = req.body;
-    const loginuserdetailsbyyear = await wealthPotfolioService.filterByYearDetailsOfUser(firstname, password, year);
+const userLoginDetailsByYear = async (req, res) => {
+  try {
+    const { firstname, password, year } = req.body;
+    const loginuserdetailsbyyear =
+      await wealthPotfolioService.filterByYearDetailsOfUser(
+        firstname,
+        password,
+        year
+      );
     res.send(loginuserdetailsbyyear);
-  }catch(error){
+  } catch (error) {
     res.status(400).send({ error: error });
   }
-}
+};
 
 //Income Expense for logged In user
-const userLoginIncomeExpenDetails = async(req,res)=>{
-  try{
-    const {firstname,password} = req.body;
-    const loginuserincomeexpendetails = await wealthPotfolioService.getIncomeExpenDetails(firstname, password);
+const userLoginIncomeExpenDetails = async (req, res) => {
+  try {
+    const { firstname, password } = req.body;
+    const loginuserincomeexpendetails =
+      await wealthPotfolioService.getIncomeExpenDetails(firstname, password);
     res.send(loginuserincomeexpendetails);
-  }catch(error){
+  } catch (error) {
     res.status(400).send({ error: error });
   }
-}
-
+};
 
 //to update fixed income with ID
 const updateFixedIncome = async (req, res) => {
   try {
-      const { id,title, description, cycle, amount} = req.body;
-      const updateFI = await wealthPotfolioService.updateFixedIncomeByID(id,{title,description,cycle,amount});
-      res.send(updateFI);
+    const { id, title, description, cycle, amount } = req.body;
+    const updateFI = await wealthPotfolioService.updateFixedIncomeByID(id, {
+      title,
+      description,
+      cycle,
+      amount,
+    });
+    res.send(updateFI);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
 };
 
 //to update Aseet with ID
 const updateAsset = async (req, res) => {
   try {
-      const { id,name, description, value, purchase_date} = req.body;
-      const updateAsset = await wealthPotfolioService.updateAssetByID(id,{name,description,value,purchase_date});
-      res.send(updateAsset);
+    const { id, name, description, value, purchase_date } = req.body;
+    const updateAsset = await wealthPotfolioService.updateAssetByID(id, {
+      name,
+      description,
+      value,
+      purchase_date,
+    });
+    res.send(updateAsset);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
 };
 
 //to update Equity with ID
 const updateEquity = async (req, res) => {
   try {
-      const { id,stock_name, unit_holding, cost_per_unit, purchase_date} = req.body;
-      const updateEquity = await wealthPotfolioService.updateEquityByID(id,{stock_name,unit_holding,cost_per_unit,purchase_date});
-      res.send(updateEquity);
+    const { id, stock_name, unit_holding, cost_per_unit, purchase_date } =
+      req.body;
+    const updateEquity = await wealthPotfolioService.updateEquityByID(id, {
+      stock_name,
+      unit_holding,
+      cost_per_unit,
+      purchase_date,
+    });
+    res.send(updateEquity);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
 };
 
 const deleteFixedIncomeById = async (req, res) => {
   try {
-      const { id } = req.body;
-      const deletefixedincome = await wealthPotfolioService.deleteFixedIncomeByID(id);
-      res.send(deletefixedincome);
+    const { id } = req.body;
+    const deletefixedincome = await wealthPotfolioService.deleteFixedIncomeByID(
+      id
+    );
+    res.send(deletefixedincome);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
 };
 
 const deleteAssetById = async (req, res) => {
   try {
-      const { id } = req.body;
-      const deleteasset = await wealthPotfolioService.deleteAssetByID(id);
-      res.send(deleteasset);
+    const { id } = req.body;
+    const deleteasset = await wealthPotfolioService.deleteAssetByID(id);
+    res.send(deleteasset);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
 };
 
 const deleteEquityById = async (req, res) => {
   try {
-      const { id } = req.body;
-      const deleteequity = await wealthPotfolioService.deleteEquityByID(id);
-      res.send(deleteequity);
+    const { id } = req.body;
+    const deleteequity = await wealthPotfolioService.deleteEquityByID(id);
+    res.send(deleteequity);
   } catch (error) {
-      res.status(400).send({ error: error });
+    res.status(400).send({ error: error });
   }
+};
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, fname) => {
+    if (err) return res.sendStatus(403);
+    req.fname = fname;
+    next();
+  });
+}
+
+const authCheck = async (req, res) => {
+  req.json(posts.filter((post) => post.firstname === req.fname.firstname));
 };
 
 module.exports = {
@@ -210,5 +261,7 @@ module.exports = {
   deleteAssetById,
   deleteEquityById,
   userLoginIncomeExpenDetails,
-  userLoginDetailsByYear
+  userLoginDetailsByYear,
+  authenticateToken,
+  authCheck,
 };
