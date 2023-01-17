@@ -62,7 +62,7 @@ const getAllEquity = async () => {
 const getDetailsOfUser = async (firstname, password) => {
   try {
     const [userDetails, metadata] = await db.query(
-      `select us.firstname as UserName ,att.name as AssetName, att.description as AssetDescription,att.value as AssetValue,f.title as FixedIncomenName,f.description as FixedIncomeDescription,f.amount as FixedIncomeValue,stock_name, (unit_holding * cost_per_unit) as total_stock_value from users us inner join assets att on us.id = att.userid inner join fixedincome f on us.id = f.userId inner join equity e on us.id = e.userId WHERE firstname = '${firstname}' AND password = '${password}'`
+      `select us.firstname as UserName ,att.name as AssetName, att.description as AssetDescription,att.value as AssetValue,f.title as FixedIncomenName,f.description as FixedIncomeDescription,f.amount as FixedIncomeValue,stock_name, (unit_holding * cost_per_unit) as total_stock_value from users us inner join assets att on us.id = att.userid inner join fixedincome f on us.id = f.userId inner join equity e on us.id = e.userId WHERE firstname = '${firstname}'`
     );
     const userDetailslen = Object.keys(userDetails).length;
     if (userDetailslen === 0) {

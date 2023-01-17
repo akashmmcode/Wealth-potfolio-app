@@ -94,13 +94,13 @@ const userLogin = async (req, res) => {
   try {
     const { firstname, password } = req.body;
 
-    const fname = { fname: firstname };
+    const user = { fname: firstname, password: password };
 
-    const accessToken = jwt.sign(fname, process.env.ACCESS_TOKEN_SECRET);
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
     res.json({ accessToken: accessToken });
 
-    const loginuser = await wealthPotfolioService.login(firstname, password);
-    res.send(loginuser);
+    // const loginuser = await wealthPotfolioService.login(firstname, password);
+    // res.send(loginuser);
   } catch (error) {
     res.status(400).send({ error: error });
   }
@@ -229,8 +229,6 @@ const deleteEquityById = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   fetchAllUsers,
   createUser,
@@ -247,5 +245,5 @@ module.exports = {
   deleteAssetById,
   deleteEquityById,
   userLoginIncomeExpenDetails,
-  userLoginDetailsByYear
+  userLoginDetailsByYear,
 };
