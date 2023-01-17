@@ -97,10 +97,13 @@ const userLogin = async (req, res) => {
     const user = { fname: firstname, password: password };
 
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken: accessToken });
 
-    // const loginuser = await wealthPotfolioService.login(firstname, password);
-    // res.send(loginuser);
+    const loginuser = await wealthPotfolioService.login(firstname, password);
+    if (loginuser != "Not authorised") {
+      res.json({ accessToken: accessToken });
+    } else {
+      res.send(loginuser);
+    }
   } catch (error) {
     res.status(400).send({ error: error });
   }
@@ -139,9 +142,9 @@ const userLoginDetailsByYear = async (req, res) => {
 //Income Expense for logged In user
 const userLoginIncomeExpenDetails = async (req, res) => {
   try {
-    const { firstname, password } = req.body;
+    const { firstname } = req.body;
     const loginuserincomeexpendetails =
-      await wealthPotfolioService.getIncomeExpenDetails(firstname, password);
+      await wealthPotfolioService.getIncomeExpenDetails(firstname);
     res.send(loginuserincomeexpendetails);
   } catch (error) {
     res.status(400).send({ error: error });

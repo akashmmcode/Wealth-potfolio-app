@@ -2,18 +2,12 @@ const wealthRoutes = require("express").Router();
 const { wealthPotfolioController } = require("./../controllers");
 const jwt = require("jsonwebtoken");
 
-wealthRoutes.get("/getAllUsers", wealthPotfolioController.fetchAllUsers);
-wealthRoutes.post("/createUser", wealthPotfolioController.createUser);
-wealthRoutes.post(
-  "/createFixedIncome",
-  wealthPotfolioController.createFixedIncome
+wealthRoutes.get(
+  "/getAllUsers",
+  authenticateToken,
+  wealthPotfolioController.fetchAllUsers
 );
-wealthRoutes.post("/createAsset", wealthPotfolioController.createAsset);
-wealthRoutes.post("/createEquity", wealthPotfolioController.createEquity);
-wealthRoutes.post(
-  "/createExpenditure",
-  wealthPotfolioController.createExpenditure
-);
+
 wealthRoutes.get("/login", wealthPotfolioController.userLogin);
 
 wealthRoutes.get(
@@ -24,8 +18,31 @@ wealthRoutes.get(
 
 wealthRoutes.get(
   "/login/getUserIncomeExpenseDetails",
+  authenticateToken,
   wealthPotfolioController.userLoginIncomeExpenDetails
 );
+
+wealthRoutes.get(
+  "/login/filterUserDetailsByYear",
+  wealthPotfolioController.userLoginDetailsByYear
+);
+
+wealthRoutes.post("/createUser", wealthPotfolioController.createUser);
+
+wealthRoutes.post(
+  "/createFixedIncome",
+  wealthPotfolioController.createFixedIncome
+);
+
+wealthRoutes.post("/createAsset", wealthPotfolioController.createAsset);
+
+wealthRoutes.post("/createEquity", wealthPotfolioController.createEquity);
+
+wealthRoutes.post(
+  "/createExpenditure",
+  wealthPotfolioController.createExpenditure
+);
+
 wealthRoutes.put(
   "/updateFixedIncomeByID",
   wealthPotfolioController.updateFixedIncome
@@ -40,10 +57,6 @@ wealthRoutes.post("/deleteAssetByID", wealthPotfolioController.deleteAssetById);
 wealthRoutes.post(
   "/deleteEquityByID",
   wealthPotfolioController.deleteEquityById
-);
-wealthRoutes.get(
-  "/login/filterUserDetailsByYear",
-  wealthPotfolioController.userLoginDetailsByYear
 );
 
 function authenticateToken(req, res, next) {

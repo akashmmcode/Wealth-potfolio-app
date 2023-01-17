@@ -74,10 +74,10 @@ const getDetailsOfUser = async (firstname, password) => {
   }
 };
 
-const getIncomeExpenDetails = async (firstname, password) => {
+const getIncomeExpenDetails = async (firstname) => {
   try {
     const [IncomeExpenDetails, metadata] = await db.query(
-      `SELECT firstname ,f.amount as income,(f.amount  - e.value) as total_savings,e.value as expenses from users u inner join fixedincome f on u.id = f.userId  inner join assets a on u.id = a.userId inner join expenditure e on u.id = e.userId WHERE firstname = '${firstname}' AND password = '${password}'`
+      `SELECT firstname ,f.amount as income,(f.amount  - e.value) as total_savings,e.value as expenses from users u inner join fixedincome f on u.id = f.userId  inner join assets a on u.id = a.userId inner join expenditure e on u.id = e.userId WHERE firstname = '${firstname}'`
     );
 
     const incomeexpenDetailslen = Object.keys(IncomeExpenDetails).length;
